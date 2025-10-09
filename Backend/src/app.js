@@ -2,28 +2,56 @@ const express = require("express");
 
 const app = express();
 
-// All the methods are handled by this route
-app.use("/user", (req, res) => {
-  res.send("HAHHAHAHHAH");
-});
-
-// This will only handle GET call to /user
-app.get("/user", (req, res) => {
+// /ac , /abc
+/* app.get("/ab?c", (req, res) => {
+  console.log(req.query);
   res.send({ firstName: "Abhishek", lastName: "Patel" });
 });
 
-app.post("/user", (req, res) => {
-  // Saving data from DB
-  res.send("Data successfully saved to the database");
+app.get("/ab+c", (req, res) => {
+  console.log(req.query);
+  res.send({ firstName: "Abhishek", lastName: "Patel" });
 });
 
-app.delete("/user", (req, res) => {
-  res.send("Deleted user successfully!");
+app.get("/ab*cd", (req, res) => {
+  console.log(req.query);
+  res.send({ firstName: "Abhishek", lastName: "Patel" });
 });
 
-// This will match all the HTTP method API calls to /test
-app.use("/test", (req, res) => {
-  res.send("Hello from the server!");
+//Optional
+app.get("/a(bc)?d", (req, res) => {
+  console.log(req.query);
+  res.send({ firstName: "Abhishek", lastName: "Patel" });
+});
+
+app.get("/a(bc)+d", (req, res) => {
+  console.log(req.query);
+  res.send({ firstName: "Abhishek", lastName: "Patel" });
+});
+
+ */
+
+// Regex
+app.get(/a/, (req, res) => {
+  console.log(req.query);
+  res.send({ firstName: "Abhishek", lastName: "Patel" });
+});
+
+app.get(/.*fly$/, (req, res) => {
+  console.log(req.query);
+  res.send({ firstName: "Abhishek", lastName: "Patel" });
+});
+
+// query paramters
+app.get("/user", (req, res) => {
+  console.log(req.query);
+  res.send({ firstName: "Abhishek", lastName: "Patel" });
+});
+
+// Dynamic routes params
+app.get("/user/:userId/:name", (req, res) => {
+  console.log(req.params);
+  res.send({ firstName: "Abhishek", lastName: "Patel" });
 });
 
 app.listen(3000, () => {
