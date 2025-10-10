@@ -34,3 +34,4 @@ How express JS basically handles requests behind the scenes
 -> A request comes in GET request express checks that whether the route is matching somewhere so what it will do is go through the chain of middlewares and then it will handle the response, If it does not find any matching route then it hangs up or if any of then is sending the response back it sends and goes no further this is how express works
 Difference between app.use vs app.all
 Write a dummy auth middleware for all user routes, except /user/login
+Error handling using app.use((err, req, res, next) => {})

@@ -1,41 +1,25 @@
 const express = require("express");
-const { adminAuth, userAuth } = require("./middlewares/auth");
 
 const app = express();
 
-// Handle Auth Middleware for all GET, POST, PATCH, DELETE requests
-app.use("/admin", adminAuth);
-// app.use("/user", userAuth);
+// Error Handlers
+app.get("/getUserData", (req, res) => {
+  try {
+    // Logic of DB call and get user data
 
-app.get("/admin/getAllData", (req, res) => {
-  // Logic of cheking if the request is authorized
-
-  // If there's multiple such request handlers do we do this auth checking part in each ?
-  // That's where we use Middleware
-  // const token = "xyz";
-  // const isAdminAuthorized = token === "xyz";
-  // if (isAdminAuthorized) {
-  //   // Logic of fetching all data
-  //   res.send("All data sent");
-  // } else {
-  //   res.status(401).send("Unauthorized");
-  // }
-
-  res.send("All data sent");
+    throw new Error("Something went wrong");
+    res.send("User data sent");
+  } catch (error) {
+    res.status(500).send("Some Error Occured");
+  }
 });
 
-app.get("/admin/deleteUser", (req, res) => {
-  // Logic of cheking if the request is authorized
-  res.send("Deleted a user");
-});
-
-// If there's only one route we can use auth middleware like this
-app.get("/user/data", userAuth, (req, res) => {
-  res.send("User data sent");
-});
-
-app.get("/user/login", (req, res) => {
-  res.send("User logged in successfully");
+// This is how we handle errors in express gracefully, err should be the first parameter
+app.use((err, req, res, next) => {
+  if (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong");
+  }
 });
 
 app.listen(3000, () => {
