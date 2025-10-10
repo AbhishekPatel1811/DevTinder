@@ -2,25 +2,21 @@ const express = require("express");
 
 const app = express();
 
-// Multiple route handlers
-app.use(
+// GET /users => It checks all the app.xxx("matching route") functions
+// GET /users => middleware chain => request handlers
+
+app.use("/", (req, res) => {
+  res.send("Handling / route");
+});
+
+app.get(
   "/user",
   (req, res, next) => {
-    // Route handler 1
     next();
-    // res.send("Route handler response 1");
   },
-  [
-    (req, res, next) => {
-      // Route handler 2
-      // res.send("Route handler response 2");
-      next();
-    },
-    (req, res, next) => {
-      // Route handler 3
-      res.send("Route handler response 3");
-    },
-  ]
+  (req, res, next) => {
+    res.send("2nd Route handler");
+  }
 );
 
 app.listen(3000, () => {
