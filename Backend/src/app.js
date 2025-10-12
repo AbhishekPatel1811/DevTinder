@@ -1,27 +1,34 @@
 const express = require("express");
-
+const { connectDB } = require("./config/database");
 const app = express();
+const { User } = require("./models/user");
 
-// Error Handlers
-app.get("/getUserData", (req, res) => {
+app.post("/signup", async (req, res) => {
+  // Creating a new instance of the user model
+  const user = new User({
+    firstName: "Abhishek",
+    lastName: "Patel",
+    emailId: "patelabhishek1811@gmail.com",
+    password: "Abhi@123",
+    gender: "Male",
+  });
+
   try {
-    // Logic of DB call and get user data
-
-    throw new Error("Something went wrong");
-    res.send("User data sent");
+    await user.save();
+    res.send("User Added successfully!");
   } catch (error) {
-    res.status(500).send("Some Error Occured");
+    res.status(400).send("Error saving the user:" + error.message);
   }
 });
 
-// This is how we handle errors in express gracefully, err should be the first parameter
-app.use((err, req, res, next) => {
-  if (err) {
+connectDB()
+  .then(() => {
+    console.log("Database connection established...");
+    app.listen(3000, () => {
+      console.log("Server is successfully listening on port 3000...");
+    });
+  })
+  .catch((err) => {
     console.log(err);
-    res.status(500).send("Something went wrong");
-  }
-});
-
-app.listen(3000, () => {
-  console.log("Server is successfully listening on port 3000...");
-});
+    console.error("Database cannot be connected!!");
+  });

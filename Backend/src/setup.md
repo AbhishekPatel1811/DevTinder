@@ -35,3 +35,14 @@ How express JS basically handles requests behind the scenes
 Difference between app.use vs app.all
 Write a dummy auth middleware for all user routes, except /user/login
 Error handling using app.use((err, req, res, next) => {})
+
+What is Mongoose
+Whenever you are connecting your Nodejs application to the MongoDB database mongoose is a very elegant, very amazing library to create schemas, models and talk to database
+Create a free cluster on MongoDB official website (Monogo Atlas)
+Install mongoose library
+Connect your application to the database "Connection URL"/devTinder
+Call the connectDB function and connect to database before starting application on port 3000
+Create a user schema & user Model
+Create a POST /signup API call to add data to the database
+Push some documents using API call from postman
+Error handling using try and catch
