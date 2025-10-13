@@ -46,3 +46,8 @@ Create a user schema & user Model
 Create a POST /signup API call to add data to the database
 Push some documents using API call from postman
 Error handling using try and catch
+
+JS object vs JSON (difference)
+express.json() middleware -> It reads the Json object and converts it to JS object and adds the JS object to req.body
+Add the express.json to your app
+Make your signup API dynamic to recieve data from the end user
