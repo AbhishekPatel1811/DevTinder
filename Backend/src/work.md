@@ -48,6 +48,8 @@ Push some documents using API call from postman
 Error handling using try and catch
 
 JS object vs JSON (difference)
-express.json() middleware -> It reads the Json object and converts it to JS object and adds the JS object to req.body
 Add the express.json to your app
+express.json() middleware -> It helps you read the JSON object/data sent from client and converts it to JS object and adds the parsed JS object to req.body
 Make your signup API dynamic to recieve data from the end user
+API - GET user by email
+API - GET feed api - find({}) - get all users from database
