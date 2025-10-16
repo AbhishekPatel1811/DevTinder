@@ -5,6 +5,7 @@ const { User } = require("./models/user");
 
 app.use(express.json());
 
+// Signup API
 app.post("/signup", async (req, res) => {
   // Creating a new instance of the user model
   const user = new User(req.body);
@@ -55,6 +56,56 @@ app.get("/feed", async (req, res) => {
     res.send(users);
   } catch (error) {
     res.status(400).send("something went wrong");
+  }
+});
+
+// Delete a user
+app.delete("/user", async (req, res) => {
+  const userId = req.body.userId;
+
+  try {
+    const deletedUser = await User.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res.status(404).send("User not found");
+    } else {
+      res.send("User deleted successfully");
+    }
+  } catch (error) {
+    res.status(400).send("Something went wrong");
+  }
+});
+
+// Update a user
+app.patch("/user", async (req, res) => {
+  const userId = req.body.userId;
+  const data = req.body;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, data);
+    if (!updatedUser) {
+      return res.status(404).send("User not found");
+    } else {
+      res.send("User updated successfully");
+    }
+  } catch (error) {
+    res.status(400).send("Something went wrong");
+  }
+});
+
+// Update a user with emailId
+app.patch("/userByEmailId", async (req, res) => {
+  const emailId = req.body.emailId;
+  const data = req.body;
+  try {
+    console.log(req.body);
+    const updatedUser = await User.findOneAndUpdate({ emailId: emailId }, data);
+    if (!updatedUser) {
+      return res.status(404).send("User not found");
+    } else {
+      res.send("User updated successfully");
+    }
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(400).send("Something went wrong: " + error.message);
   }
 });
 

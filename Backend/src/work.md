@@ -53,3 +53,7 @@ express.json() middleware -> It helps you read the JSON object/data sent from cl
 Make your signup API dynamic to recieve data from the end user
 API - GET user by email
 API - GET feed api - find({}) - get all users from database
+Create a delete user API
+Create a update user API
+Explore the mongoose documentation for Model methods.
+API - update user with email ID
