@@ -57,3 +57,10 @@ Create a delete user API
 Create a update user API
 Explore the mongoose documentation for Model methods.
 API - update user with email ID
+
+Explore Schema type options from the documentation
+Add required, unique, minLenght, maxLength, trim, lowercase
+Add default values
+Create a custom validation function for gender
+Improve the DB schema - PUT all appropriate validations on each field in schema
+Add timestamps to the userSchema
