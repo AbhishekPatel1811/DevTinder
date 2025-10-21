@@ -42,7 +42,7 @@ const userSchema = new Schema(
       },
     },
     photoUrl: { type: String },
-    bio: { type: String, default: "This is a default about of the user!" },
+    about: { type: String, default: "This is a default about of the user!" },
     skills: { type: [String] },
   },
   { timestamps: true } // By default it adds createdAt and updatedAt fields to the schema
