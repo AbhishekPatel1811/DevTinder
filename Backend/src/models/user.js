@@ -3,8 +3,20 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    firstName: { type: String, required: true, minLength: 4, maxLength: 20 },
-    lastName: { type: String, required: true, minLength: 4, maxLength: 20 },
+    firstName: {
+      type: String,
+      required: true,
+      minLength: 4,
+      maxLength: 20,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      minLength: 4,
+      maxLength: 20,
+      trim: true,
+    },
     emailId: {
       type: String,
       lowercase: true,
@@ -12,7 +24,14 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    password: { type: String, required: true, lowercase: true, trim: true },
+    password: {
+      type: String,
+      required: true,
+      lowercase: true,
+      trim: true,
+      minLength: 6,
+      maxLength: 100,
+    },
     age: { type: Number, min: 18, max: 50 },
     gender: {
       type: String,
