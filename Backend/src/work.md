@@ -67,3 +67,7 @@ Add timestamps to the userSchema
 Add API level validation on Patch request & signup Post API
 Data sanitization - Add API validation for each field
 Install validator, explore validator library functions and use it for password, email and photoURL
+
+Validate data in Signup API
+Install bcrypt package 
+Create a PasswordHash using bcrypt.hash & save the user in encrypted password

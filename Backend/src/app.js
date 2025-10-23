@@ -1,6 +1,8 @@
 const express = require("express");
 const { connectDB } = require("./config/database");
 const { User } = require("./models/user");
+const { validateSignUpData } = require("./utils/validation");
+const bcrypt = require("bcrypt");
 
 const app = express();
 
@@ -8,14 +10,28 @@ app.use(express.json());
 
 // Signup API
 app.post("/signup", async (req, res) => {
-  // Creating a new instance of the user model
-  const user = new User(req.body);
-
   try {
+    // Validation of data
+    validateSignUpData(req);
+
+    const { firstName, lastName, emailId, password } = req.body;
+
+    // Encrypt the password
+    const passwordHash = await bcrypt.hash(password, 10);
+    console.log("Password Hash: " + passwordHash);
+
+    // Creating a new instance of the user model
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password: passwordHash,
+    });
+
     await user.save();
     res.send("User Added successfully!");
   } catch (error) {
-    res.status(400).send("Error saving the user:" + error.message);
+    res.status(400).send("ERROR: " + error.message);
   }
 });
 
@@ -106,7 +122,7 @@ app.patch("/user/:userId", async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(userId, data, {
       runValidators: true,
     });
-    
+
     if (!updatedUser) {
       return res.status(404).send("User not found");
     } else {
