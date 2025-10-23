@@ -78,7 +78,7 @@ app.delete("/user", async (req, res) => {
 
 // Update a user
 app.patch("/user/:userId", async (req, res) => {
-  const userId = req.params.userId;
+  const userId = req.params?.userId;
   const data = req.body;
 
   try {
@@ -106,6 +106,7 @@ app.patch("/user/:userId", async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(userId, data, {
       runValidators: true,
     });
+    
     if (!updatedUser) {
       return res.status(404).send("User not found");
     } else {
