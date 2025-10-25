@@ -73,3 +73,13 @@ Install bcrypt package
 Create a PasswordHash using bcrypt.hash & save the user in encrypted password
 Create Login API 
 Compare passwords and throw errors if email or password is invalid 
+
+
+Authentication
+Login - whenever a user is logining in server will create a token attach it into a cookie and send back. now, that cookie will be stored by the browser any requests comes in next the cookie will be sent along with it then we will validate it once again and then do anything we want to do in our application.
+Reading cookies using -> cookie-parser
+- just send a dummy cookie to user
+- create GET /profile API and check if you get the cookie back using (req.cookies)
+- install jsonwebtoken
+- In Login API, after email and password validation, create a JWT token and send it to user inside cookies
+- read the cookies inside your profile API and find the logged in user
