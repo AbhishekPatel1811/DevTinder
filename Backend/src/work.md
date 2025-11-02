@@ -90,3 +90,7 @@ Schema methods -> Create userSchema methods to getJWT()
 Read docs for express.Router
 Create routes folder for managing auth, profile, request routers
 Create authRouter, profileRouter, requestRouter
+Create POST /logout API
+Create PATCH /profile/edit
+Create PATCH /profile/password API - Forgot password
+

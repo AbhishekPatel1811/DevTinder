@@ -6,7 +6,13 @@
 
 - GET /profile/view
 - PATCH /profile/edit
-- PATCH /profile/password
+- PATCH /profile/password - Forgot password API 
+(
+- Take existing pass with new password
+- Validate password 
+- bcrypt.compare
+- update pass in db
+)
 
 - POST /request/send/interested/:userId
 - POST /request/send/ignored/:userId

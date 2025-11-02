@@ -35,6 +35,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+// Login API
 router.post("/login", async (req, res) => {
   try {
     const { emailId, password } = req.body;
@@ -66,6 +67,15 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     res.status(400).send("ERROR: " + error.message);
   }
+});
+
+// Logout API
+router.post("/logout", async (req, res) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+  });
+
+  res.send("Logged out successfully!!!");
 });
 
 module.exports = router;

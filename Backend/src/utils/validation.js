@@ -22,4 +22,36 @@ const validateLoginData = (req) => {
   }
 };
 
-module.exports = { validateSignUpData, validateLoginData };
+const validateProfileEditData = (req) => {
+  const { age, photoUrl, skills } = req.body;
+
+  if (age <= 18) {
+    throw new Error("Your age is not valid");
+  } else if (!validator.isURL(photoUrl)) {
+    throw new Error("Invalid photo URL");
+  } else if (skills.length > 10) {
+    throw new Error("please add only 10 skills");
+  }
+
+  const isAllowedEditFields = [
+    "firstName",
+    "lastName",
+    "age",
+    "gender",
+    "photoUrl",
+    "about",
+    "skills",
+  ];
+
+  const isAllowedFields = Object.keys(req.body).every((field) =>
+    isAllowedEditFields.includes(field)
+  );
+
+  return isAllowedFields;
+};
+
+module.exports = {
+  validateSignUpData,
+  validateLoginData,
+  validateProfileEditData,
+};
