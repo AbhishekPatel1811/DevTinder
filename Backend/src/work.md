@@ -86,3 +86,7 @@ userAuth middleware
 Add the userAuth middleware in /profile API and a new /sendConnectionRequest API
 Set the expiry of JWT token and cookies to 7 days
 Schema methods -> Create userSchema methods to getJWT()
+
+Read docs for express.Router
+Create routes folder for managing auth, profile, request routers
+Create authRouter, profileRouter, requestRouter
