@@ -94,3 +94,13 @@ Create POST /logout API
 Create PATCH /profile/edit
 Create PATCH /profile/password API - Forgot password
 
+Create ConnectionRequest Schema 
+Send Connection Request  API
+Proper validation of data, think of all corner cases
+Read 
+- schema.pre("save", function(){})
+- $or and $and query in mongoose
+- Compound Indexes (MongoDB docs)
+- why do we need an index in DB
+- what are adv, disAdvantages of creating index
+- why we should not add lot of indexes 
