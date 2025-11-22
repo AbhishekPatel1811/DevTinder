@@ -10,8 +10,7 @@ router.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
   try {
     // Logged In user
     const fromUserId = req.user._id;
-    const toUserId = req.params.toUserId;
-    const status = req.params.status;
+    const { toUserId, status } = req.params;
 
     // Only allow ignored and interested as stauts
     const allowedStatus = ["ignored", "interested"];
@@ -29,7 +28,7 @@ router.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
       });
     }
 
-    // Check if there is an existing connectionReques
+    // Check if there is an existing connectionRequest
     const existingConnectionRequest = await ConnectionRequest.findOne({
       $or: [
         { fromUserId, toUserId },
@@ -59,5 +58,52 @@ router.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
     res.status(400).send("ERROR: " + err.message);
   }
 });
+
+// Accepted and Rejected API
+router.post(
+  "/request/review/:status/:requestId",
+  userAuth,
+  async (req, res) => {
+    try {
+      const loggedInUser = req.user._id;
+      const { status, requestId } = req.params;
+
+      // Only allow accepted and rejected as stauts
+      const allowedStatus = ["accepted", "rejected"];
+      if (!allowedStatus.includes(status)) {
+        return res
+          .status(400)
+          .json({ message: "Invalid status type: " + status });
+      }
+
+      // Find the connectionRequest in db by requestId (userInput), ensuring the request approved by should be loggedIn user and the status should be interested
+      const connectionRequest = await ConnectionRequest.findOne({
+        _id: requestId,
+        toUserId: loggedInUser,
+        status: "interested",
+      });
+
+      if (!connectionRequest) {
+        return res
+          .status(400)
+          .json({ message: "Connection request is not found" });
+      }
+
+      // pushing the status (accepted or rejected) to the connectionRequest
+      connectionRequest.status = status;
+
+      const data = await connectionRequest.save();
+
+      res
+        .status(200)
+        .json({
+          message: "Connection request " + status + " successfully",
+          data,
+        });
+    } catch (err) {
+      res.status(400).send("ERROR: " + err.message);
+    }
+  }
+);
 
 module.exports = router;
