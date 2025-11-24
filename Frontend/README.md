@@ -1,6 +1,7 @@
 
-# DevTinder
+# Building DevTinder Frontend
 
 - Created a Vite + React application
 - Removed unnecessary code
-- Daisy and Tailwind for UI components
+- Setup and install Tailwind, ShadCn Library
+- Add a basic navbar to the application

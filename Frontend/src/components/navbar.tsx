@@ -56,7 +56,7 @@ const Navbar1 = ({
         url: "https://www.shadcnblocks.com",
         src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
         alt: "logo",
-        title: "Shadcnblocks.com",
+        title: "DevTinder",
     },
     menu = [
         { title: "Home", url: "#" },
@@ -136,7 +136,7 @@ const Navbar1 = ({
     },
 }: Navbar1Props) => {
     return (
-        <section className="py-4">
+        <section className="px-6 py-4">
             <div className="container">
                 {/* Desktop Menu */}
                 <nav className="hidden items-center justify-between lg:flex">
