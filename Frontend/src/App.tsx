@@ -1,11 +1,22 @@
-import Navbar from "@/components/navbar"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Login from "./components/login"
+import Body from "./components/Body"
+import Profile from "./components/Profile"
+import Footer from "./components/Footer"
 
 function App() {
 
     return (
         <>
-            <Navbar />
-            <h1 className='text-3xl font-bold text-center text-red-500'>Vite + React</h1>
+            <BrowserRouter basename="/">
+                <Routes>
+                    <Route path="/" element={<Body />} >
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/footer" element={<Footer />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
         </>
     )
 }
