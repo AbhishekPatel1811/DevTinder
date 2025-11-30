@@ -4,11 +4,14 @@ import Footer from './Footer'
 
 const Body = () => {
     return (
-
-        <div>
+        <div className="flex flex-col min-h-screen bg-gray-50">
             <Navbar />
-            <Outlet />
-            <Footer />
+            <main className="flex flex-col grow">
+                <div className="flex-1 flex flex-col">
+                    <Outlet />
+                </div>
+                <Footer />
+            </main>
         </div>
     )
 }
