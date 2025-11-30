@@ -1,4 +1,4 @@
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Book, CodeXml, Menu, Sunset, Trees, Zap } from "lucide-react";
 
 import {
     Accordion,
@@ -6,6 +6,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
     NavigationMenu,
@@ -22,6 +23,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet";
+import { useSelector } from "react-redux";
 
 interface MenuItem {
     title: string;
@@ -32,12 +34,6 @@ interface MenuItem {
 }
 
 interface NavbarProps {
-    logo?: {
-        url: string;
-        src: string;
-        alt: string;
-        title: string;
-    };
     menu?: MenuItem[];
     auth?: {
         login: {
@@ -52,12 +48,6 @@ interface NavbarProps {
 }
 
 const Navbar = ({
-    logo = {
-        url: "https://www.shadcnblocks.com",
-        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
-        alt: "logo",
-        title: "DevTinder",
-    },
     menu = [
         { title: "Home", url: "#" },
         {
@@ -130,11 +120,11 @@ const Navbar = ({
             url: "#",
         },
     ],
-    auth = {
-        login: { title: "Login", url: "#" },
-        signup: { title: "Sign up", url: "#" },
-    },
 }: NavbarProps) => {
+
+    const user = useSelector((store: any) => store.user)
+    console.log("user -->", user);
+
     return (
         <section className="px-6 py-4">
             <div className="container">
@@ -142,16 +132,12 @@ const Navbar = ({
                 <nav className="hidden items-center justify-between lg:flex">
                     <div className="flex items-center gap-6">
                         {/* Logo */}
-                        <a href={logo.url} className="flex items-center gap-2">
-                            <img
-                                src={logo.src}
-                                className="max-h-8 dark:invert"
-                                alt={logo.alt}
-                            />
-                            <span className="text-lg font-semibold tracking-tighter">
-                                {logo.title}
+                        <div className="flex items-center gap-2 justify-start">
+                            <span className="flex items-center gap-2 font-semibold">
+                                <CodeXml className="size-5 shrink-0" />
+                                DevTinder
                             </span>
-                        </a>
+                        </div>
                         <div className="flex items-center">
                             <NavigationMenu>
                                 <NavigationMenuList>
@@ -160,27 +146,29 @@ const Navbar = ({
                             </NavigationMenu>
                         </div>
                     </div>
-                    <div className="flex gap-2">
-                        <Button asChild variant="outline" size="sm">
-                            <a href={auth.login.url}>{auth.login.title}</a>
-                        </Button>
-                        <Button asChild size="sm">
-                            <a href={auth.signup.url}>{auth.signup.title}</a>
-                        </Button>
-                    </div>
+                    {user && (
+                        <div className="flex flex-col gap-3">
+                            <Avatar>
+                                <AvatarImage src={user.photoUrl} />
+                                <AvatarFallback>
+                                    {user.firstName.charAt(0)}
+                                    {user.lastName.charAt(0)}
+                                </AvatarFallback>
+                            </Avatar>
+                        </div>
+                    )}
                 </nav>
 
                 {/* Mobile Menu */}
                 <div className="block lg:hidden">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
-                        <a href={logo.url} className="flex items-center gap-2">
-                            <img
-                                src={logo.src}
-                                className="max-h-8 dark:invert"
-                                alt={logo.alt}
-                            />
-                        </a>
+                        <div className="flex items-center gap-2 justify-start">
+                            <span className="flex items-center gap-2 font-semibold">
+                                <CodeXml className="size-5 shrink-0" />
+                                DevTinder
+                            </span>
+                        </div>
                         <Sheet>
                             <SheetTrigger asChild>
                                 <Button variant="outline" size="icon">
@@ -190,15 +178,15 @@ const Navbar = ({
                             <SheetContent className="overflow-y-auto">
                                 <SheetHeader>
                                     <SheetTitle>
-                                        <a href={logo.url} className="flex items-center gap-2">
-                                            <img
-                                                src={logo.src}
-                                                className="max-h-8 dark:invert"
-                                                alt={logo.alt}
-                                            />
-                                        </a>
+                                        <div className="flex items-center gap-2 justify-start">
+                                            <span className="flex items-center gap-2 font-semibold">
+                                                <CodeXml className="size-5 shrink-0" />
+                                                DevTinder
+                                            </span>
+                                        </div>
                                     </SheetTitle>
                                 </SheetHeader>
+
                                 <div className="flex flex-col gap-6 p-4">
                                     <Accordion
                                         type="single"
@@ -207,15 +195,17 @@ const Navbar = ({
                                     >
                                         {menu.map((item) => renderMobileMenuItem(item))}
                                     </Accordion>
-
-                                    <div className="flex flex-col gap-3">
-                                        <Button asChild variant="outline">
-                                            <a href={auth.login.url}>{auth.login.title}</a>
-                                        </Button>
-                                        <Button asChild>
-                                            <a href={auth.signup.url}>{auth.signup.title}</a>
-                                        </Button>
-                                    </div>
+                                    {user && (
+                                        <div className="flex flex-col gap-3">
+                                            <Avatar>
+                                                <AvatarImage src={user.photoUrl} />
+                                                <AvatarFallback>
+                                                    {user.firstName.charAt(0)}
+                                                    {user.lastName.charAt(0)}
+                                                </AvatarFallback>
+                                            </Avatar>
+                                        </div>
+                                    )}
                                 </div>
                             </SheetContent>
                         </Sheet>
@@ -246,7 +236,7 @@ const renderMenuItem = (item: MenuItem) => {
         <NavigationMenuItem key={item.title}>
             <NavigationMenuLink
                 href={item.url}
-                className="bg-background hover:bg-muted hover:text-accent-foreground group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
+                className="bg-transparent hover:bg-muted hover:text-accent-foreground group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
             >
                 {item.title}
             </NavigationMenuLink>

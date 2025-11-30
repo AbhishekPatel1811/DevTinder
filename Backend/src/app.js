@@ -1,8 +1,16 @@
 const express = require("express");
 const { connectDB } = require("./config/database");
 const cookieParser = require("cookie-parser");
-
+const cors = require("cors");
 const app = express();
+
+// Whitelisting the frontend origin
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 // for parsing incoming requests with json payloads
 app.use(express.json());

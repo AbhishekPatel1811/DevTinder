@@ -1,8 +1,20 @@
 
 # Building DevTinder Frontend
 
-- Created a Vite + React application
+- Create a Vite + React application
 - Removed unnecessary code
-- Setup and install Tailwind, ShadCn Library
-- Add a basic navbar to the application
+- Install Tailwind with ShadCN for components and blocks
+- Add a basic navbar and footer to the application
 - Setup routing with basic routes
+    Install react router dom
+    Create BrowserRouter > Routes > Route = /Body > RouteChildren
+    Create outlet in Body component
+- Configure and complete authentication
+    Create a login, signup page
+    Install CORS in backend => add middleware to with configuration: origin, credentials: true
+    When making API call so pass axios, {withCredentials: true}
+    Install Redux toolkit (@reduxjs/toolkit +  react-redux)
+       configureStore => Provider => createSlice => add reducer to store
+    Login and see if data is stored properly in redux store
+    Navbar should update as soon as user logs in
+    

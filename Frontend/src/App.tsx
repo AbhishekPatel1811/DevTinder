@@ -1,22 +1,30 @@
+import { Provider } from "react-redux"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Login from "./components/login"
+import { Toaster } from "sonner"
 import Body from "./components/Body"
+import Feed from "./components/Feed"
+import Login from "./components/Login"
 import Profile from "./components/Profile"
-import Footer from "./components/Footer"
+import Signup from "./components/Signup"
+import { appStore } from "./utils/appStore"
 
 function App() {
 
     return (
         <>
-            <BrowserRouter basename="/">
-                <Routes>
-                    <Route path="/" element={<Body />} >
+            <Provider store={appStore}>
+                <Toaster position="bottom-right" richColors />
+                <BrowserRouter basename="/">
+                    <Routes>
                         <Route path="/login" element={<Login />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/footer" element={<Footer />} />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
+                        <Route path="/signup" element={<Signup />} />
+                        <Route path="/" element={<Body />} >
+                            <Route path="/" element={<Feed />} />
+                            <Route path="/profile" element={<Profile />} />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </Provider>
         </>
     )
 }
