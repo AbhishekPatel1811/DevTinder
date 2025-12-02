@@ -16,4 +16,7 @@
        configureStore => Provider => createSlice => add reducer to store
     Login and see if data is stored properly in redux store
     Navbar should update as soon as user logs in
+- If token not present redirect to /login
+- Complete auth with login, logout feature
+
     
