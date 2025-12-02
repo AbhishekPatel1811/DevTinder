@@ -13,7 +13,7 @@ function App() {
     return (
         <>
             <Provider store={appStore}>
-                <Toaster position="bottom-right" richColors />
+                <Toaster position="bottom-right" />
                 <BrowserRouter basename="/">
                     <Routes>
                         <Route path="/login" element={<Login />} />

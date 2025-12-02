@@ -1,4 +1,3 @@
-
 # Building DevTinder Frontend
 
 - Create a Vite + React application

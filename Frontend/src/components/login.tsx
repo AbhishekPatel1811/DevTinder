@@ -10,15 +10,15 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { axiosInstance } from "@/lib/api";
+import { addUser } from "@/utils/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CodeXml } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import axios from "axios";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUser } from "@/utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const loginSchema = z.object({
     email: z.email("Invalid email address"),
@@ -29,7 +29,6 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function Login() {
     const navigate = useNavigate();
-    const API_URL = import.meta.env.VITE_API_URL;
     const dispatch = useDispatch()
 
     const {
@@ -44,10 +43,10 @@ export default function Login() {
         console.log("form data -->", data);
 
         try {
-            const res = await axios.post(`${API_URL}/login`, {
+            const res = await axiosInstance.post("/login", {
                 emailId: data.email,
                 password: data.password
-            }, { withCredentials: true });
+            });
 
             // Add the user to the store
             dispatch(addUser(res.data))

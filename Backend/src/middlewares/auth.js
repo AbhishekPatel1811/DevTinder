@@ -6,7 +6,7 @@ const userAuth = async (req, res, next) => {
     // Read the token from the req cookies
     const { token } = req.cookies;
     if (!token) {
-      throw new Error("Token is not valid!!!");
+      return res.status(401).send("Unauthorized: Token is not valid!!!");
     }
 
     // Validate the token
@@ -17,12 +17,12 @@ const userAuth = async (req, res, next) => {
     // Find the user
     const user = await User.findById(_id);
     if (!user) {
-      throw new Error("User not found");
+      return res.status(401).send("User not found");
     }
 
     // Attaching the found user back to req
     req.user = user;
-    next();
+    return next();
   } catch (err) {
     res.status(400).send("ERROR: " + err.message);
   }

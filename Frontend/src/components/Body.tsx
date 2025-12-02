@@ -1,8 +1,38 @@
-import { Outlet } from 'react-router-dom'
-import Navbar from './Navbar'
-import Footer from './Footer'
+import { axiosInstance } from '@/lib/api';
+import { addUser } from '@/utils/userSlice';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
+import Footer from './Footer';
+import Navbar from './Navbar';
+import { toast } from 'sonner';
 
 const Body = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const userData = useSelector((store: any) => store.user)
+
+    const fetchUser = async () => {
+        try {
+            const res = await axiosInstance.get("/profile/view")
+            dispatch(addUser(res.data))
+            console.log("user -->", res.data);
+        }
+        catch (err: any) {
+            if (err.response.status === 401) {
+                toast.error("Unauthorized: Please login again")
+                navigate("/login")
+            }
+            console.log("error -->", err);
+        }
+    }
+
+    useEffect(() => {
+        if (!userData) {
+            fetchUser()
+        }
+    }, [])
+
     return (
         <div className="flex flex-col min-h-screen bg-gray-50">
             <Navbar />
