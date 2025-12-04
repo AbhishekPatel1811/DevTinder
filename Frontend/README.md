@@ -18,5 +18,8 @@
     Navbar should update as soon as user logs in
 - If token not present redirect to /login
 - Complete auth with login, logout feature
+- Creating feed page
+   Add feed to the store 
+   Build the user cards UI for feed
 
     

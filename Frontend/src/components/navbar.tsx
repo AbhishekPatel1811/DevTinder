@@ -21,7 +21,6 @@ const Navbar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const user = useSelector((store: any) => store.user)
-    console.log("user -->", user);
 
     const handleLogout = async () => {
         try {
@@ -54,8 +53,8 @@ const Navbar = () => {
                     {user && (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Avatar className="size-8 cursor-pointer">
-                                    <AvatarImage src={user.photoUrl} />
+                                <Avatar className="size-9 cursor-pointer">
+                                    <AvatarImage src={user.photoUrl} className="object-cover" />
                                     <AvatarFallback className="border border-gray-300 text-sm font-medium">
                                         {user.firstName.charAt(0)}
                                         {user.lastName.charAt(0)}
