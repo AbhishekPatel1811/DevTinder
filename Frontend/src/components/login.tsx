@@ -13,7 +13,8 @@ import { Label } from "@/components/ui/label";
 import { axiosInstance } from "@/lib/api";
 import { addUser } from "@/utils/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CodeXml } from "lucide-react";
+import { CodeXml, EyeIcon, EyeOffIcon } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -21,27 +22,32 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const loginSchema = z.object({
-    email: z.email("Invalid email address"),
-    password: z.string().min(8, "Password must be at least 8 characters long")
+    email: z
+        .email("Invalid email address"),
+
+    password: z
+        .string()
+        .nonempty("Password is required")
+        .min(8, "Password must be at least 8 characters long"),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function Login() {
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const [isEyeOpen, setIsEyeOpen] = useState(false)
 
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting }
+        formState: { errors, isSubmitting },
+        trigger,
     } = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema)
     });
 
     const onSubmit = async (data: LoginFormData) => {
-        console.log("form data -->", data);
-
         try {
             const res = await axiosInstance.post("/login", {
                 emailId: data.email,
@@ -56,9 +62,9 @@ export default function Login() {
                 navigate("/")
             }
         }
-        catch (error) {
-            console.log("error -->", error);
-            toast.error("Login failed!! ");
+        catch (error: any) {
+            console.error("Login error", error)
+            toast.error(error.response.data || "Login failed!!");
         }
 
     };
@@ -75,30 +81,53 @@ export default function Login() {
             <Card className="w-full md:w-[400px]">
                 <CardHeader>
                     <CardTitle className="font-semibold tracking-tight text-2xl">Login</CardTitle>
-                    <CardDescription className="text-sm text-muted-foreground">Enter your credentials to access your account</CardDescription>
+                    <CardDescription className="text-sm text-muted-foreground">
+                        Enter your credentials to access your account
+                    </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
                             <Input
                                 id="email"
                                 type="email"
                                 placeholder="Enter your email"
-                                {...register("email")}
-                                aria-invalid={errors.email ? "true" : "false"}
+                                {...register("email", {
+                                    required: "Email is required",
+                                    onBlur: () => trigger("email")
+                                })}
+                                aria-invalid={!!errors.email}
+                                className={errors.email ? "border-red-500 focus:border-red-500" : ""}
                             />
-                            {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
+                            {/* Show error message in red below the input */}
+                            {errors.email && (
+                                <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+                            )}
                         </div>
-                        <div className="space-y-2">
+                        <div className="space-y-2 relative">
                             <Label htmlFor="password">Password</Label>
                             <Input
                                 id="password"
-                                type="password"
+                                type={isEyeOpen ? "text" : "password"}
                                 placeholder="Enter your password"
-                                {...register("password")}
-                                aria-invalid={errors.password ? "true" : "false"}
+                                {...register("password", {
+                                    required: "Password is required",
+                                    onBlur: () => trigger("password")
+                                })}
+                                aria-invalid={!!errors.password}
+                                className={errors.password ? "border-red-500 focus:border-red-500" : ""}
                             />
+                            <button type="button"
+                                className="absolute right-4 top-2/3 -translate-y-2/3 cursor-pointer"
+                                aria-label={isEyeOpen ? "Hide password" : "Show password"}
+                                onClick={() => setIsEyeOpen(!isEyeOpen)}
+                            >
+                                {isEyeOpen ? <EyeIcon className={`size-4`} /> : <EyeOffIcon className={`size-4`} />}
+                            </button>
+
+
+                            {/* Show error message in red below the input */}
                             {errors.password && (
                                 <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
                             )}

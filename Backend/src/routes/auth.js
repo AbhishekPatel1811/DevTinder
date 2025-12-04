@@ -46,11 +46,13 @@ router.post("/login", async (req, res) => {
     // find the user
     const user = await User.findOne({ emailId: emailId });
     if (!user) {
-      throw new Error("Invalid Credentials");
+      throw new Error("User not found");
     }
 
     // compare the password
-    const isPasswordValid = bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    console.log("isPasswordValid -->", isPasswordValid);
 
     if (isPasswordValid) {
       // create a JWT token
