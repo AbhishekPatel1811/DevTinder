@@ -1,7 +1,8 @@
+import ProfileContainer from "./ProfileContainer"
 
 const Profile = () => {
     return (
-        <div>Profile</div>
+        <ProfileContainer />
     )
 }
 

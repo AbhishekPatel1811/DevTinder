@@ -87,12 +87,30 @@ const Signup = () => {
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="firstName">First Name</Label>
-                    <Input id="firstName" type="text" placeholder="Enter your firstName" {...register("firstName")} aria-invalid={errors.firstName ? "true" : "false"} />
+                    <Input
+                      id="firstName"
+                      type="text"
+                      placeholder="Enter your First Name"
+                      {...register("firstName")}
+                      aria-invalid={errors.firstName ? "true" : "false"}
+                      className={`
+                      ${errors.firstName ? "border-red-500 focus:border-red-500" : ""}
+                    `}
+                    />
                     {errors.firstName && <p className="mt-1 text-sm text-red-500">{errors.firstName.message}</p>}
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="lastName">Last Name</Label>
-                    <Input id="lastName" type="text" placeholder="Enter your lastName" {...register("lastName")} aria-invalid={errors.lastName ? "true" : "false"} />
+                    <Input
+                      id="lastName"
+                      type="text"
+                      placeholder="Enter your Last Name"
+                      {...register("lastName")}
+                      aria-invalid={errors.lastName ? "true" : "false"}
+                      className={`
+                      ${errors.lastName ? "border-red-500 focus:border-red-500" : ""}
+                    `}
+                    />
                     {errors.lastName && <p className="mt-1 text-sm text-red-500">{errors.lastName.message}</p>}
                   </div>
                   <div className="grid gap-2">
@@ -110,7 +128,16 @@ const Signup = () => {
                     <div className="flex items-center">
                       <Label htmlFor="password">Password</Label>
                     </div>
-                    <Input id="password" type={isEyeOpen ? "text" : "password"} required {...register("password")} aria-invalid={errors.password ? "true" : "false"} value={password}
+                    <Input
+                      id="password"
+                      type={isEyeOpen ? "text" : "password"}
+                      required
+                      {...register("password")}
+                      aria-invalid={errors.password ? "true" : "false"}
+                      value={password}
+                      className={`
+                      ${errors.password ? "border-red-500 focus:border-red-500" : ""}
+                    `}
                       placeholder="Enter your password"
                     />
                     <button type="button"
@@ -136,10 +163,9 @@ const Signup = () => {
                         value={confirmPassword}
                         placeholder="Confirm your password"
                         className={`
-                          pr-10
                           ${errors.confirmPassword ? "border-red-500 focus:border-red-500" : ""}
+                          pr-10
                         `}
-                        style={{ paddingRight: "2.5rem" }}
                       />
                       <button
                         type="button"

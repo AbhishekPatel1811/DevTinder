@@ -26,7 +26,7 @@ const Feed = () => {
     }, [])
 
     return (feed && (
-        <UserCard feedData={feed} />
+        <UserCard user={feed} />
     )
     )
 };
