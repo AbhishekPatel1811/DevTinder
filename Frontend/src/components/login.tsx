@@ -17,7 +17,7 @@ import { CodeXml, EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -139,6 +139,9 @@ export default function Login() {
                     </form>
                 </CardContent>
             </Card>
+            <p className="text-muted-foreground text-sm">Don't have an account?
+                <Link to="/signup" className="text-primary hover:underline ml-1">Signup</Link>
+            </p>
         </section>
     );
 }

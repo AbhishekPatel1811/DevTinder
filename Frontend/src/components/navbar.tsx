@@ -55,7 +55,7 @@ const Navbar = () => {
                             <DropdownMenuTrigger asChild>
                                 <Avatar className="size-9 cursor-pointer">
                                     <AvatarImage src={user.photoUrl} className="object-cover" />
-                                    <AvatarFallback className="border border-gray-300 text-sm font-medium">
+                                    <AvatarFallback className="border border-gray-300 text-sm font-medium uppercase">
                                         {user.firstName.charAt(0)}
                                         {user.lastName.charAt(0)}
                                     </AvatarFallback>
