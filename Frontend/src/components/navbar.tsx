@@ -1,6 +1,5 @@
-import { CodeXml } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CodeXml } from "lucide-react";
 
 import {
     DropdownMenu,
@@ -16,6 +15,7 @@ import { removeUser } from "@/utils/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
     const navigate = useNavigate()
@@ -35,7 +35,7 @@ const Navbar = () => {
     }
 
     return (
-        <section className="px-6 py-4 bg-muted mx-14 my-4 rounded-full">
+        <section className="px-6 py-3 bg-muted mx-14 my-4 rounded-full">
             <div className="container">
                 {/* Desktop Menu */}
                 <nav className="flex items-center justify-between">
@@ -49,50 +49,56 @@ const Navbar = () => {
                                 </span>
                             </Link>
                         </div>
+
                     </div>
-                    {user && (
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Avatar className="size-9 cursor-pointer">
-                                    <AvatarImage src={user.photoUrl} className="object-cover" />
-                                    <AvatarFallback className="border border-gray-300 text-sm font-medium uppercase">
-                                        {user.firstName.charAt(0)}
-                                        {user.lastName.charAt(0)}
-                                    </AvatarFallback>
-                                </Avatar>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-48" align="end" side="top" sideOffset={10}>
-                                <DropdownMenuLabel className="text-sm font-medium">
-                                    <div className="grid flex-1 text-left text-sm leading-tight whitespace-nowrap space-y-1">
-                                        <span className="text-sm font-medium leading-none tracking-wide">
-                                            {user?.firstName + " " + user?.lastName || "User"}
-                                        </span>
-                                        <span
-                                            title={user?.emailId || "internal@vedteq.com"}
-                                            className="text-xs text-muted-foreground tracking-wide cursor-pointer"
-                                        >
-                                            {user?.emailId || "internal@vedteq.com"}
-                                        </span>
-                                    </div>
-                                </DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuGroup>
-                                    <DropdownMenuItem asChild>
-                                        <Link to="/profile">
-                                            Profile
-                                        </Link>
+
+                    <div className="flex items-center justify-between gap-4">
+                        <ThemeToggle />
+                        <div className="w-0.5 h-5 bg-gray-300" />
+                        {user && (
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Avatar className="size-9 cursor-pointer">
+                                        <AvatarImage src={user.photoUrl} className="object-cover object-top" />
+                                        <AvatarFallback className="border border-gray-300 text-sm font-medium uppercase">
+                                            {user.firstName.charAt(0)}
+                                            {user.lastName.charAt(0)}
+                                        </AvatarFallback>
+                                    </Avatar>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="w-48" align="end" side="top" sideOffset={10}>
+                                    <DropdownMenuLabel className="text-sm font-medium">
+                                        <div className="grid flex-1 text-left text-sm leading-tight whitespace-nowrap space-y-1">
+                                            <span className="text-sm font-medium leading-none tracking-wide">
+                                                {user?.firstName + " " + user?.lastName || "User"}
+                                            </span>
+                                            <span
+                                                title={user?.emailId || "internal@vedteq.com"}
+                                                className="text-xs text-muted-foreground tracking-wide cursor-pointer"
+                                            >
+                                                {user?.emailId || "internal@vedteq.com"}
+                                            </span>
+                                        </div>
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuGroup>
+                                        <DropdownMenuItem asChild>
+                                            <Link to="/profile">
+                                                Profile
+                                            </Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem>
+                                            Settings
+                                        </DropdownMenuItem>
+                                    </DropdownMenuGroup>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem onClick={() => handleLogout()}>
+                                        Log out
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        Settings
-                                    </DropdownMenuItem>
-                                </DropdownMenuGroup>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem onClick={() => handleLogout()}>
-                                    Log out
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    )}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        )}
+                    </div>
                 </nav>
             </div>
         </section>
