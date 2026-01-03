@@ -107,25 +107,32 @@ export default function Login() {
                         </div>
                         <div className="space-y-2 relative">
                             <Label htmlFor="password">Password</Label>
-                            <Input
-                                id="password"
-                                type={isEyeOpen ? "text" : "password"}
-                                placeholder="Enter your password"
-                                {...register("password", {
-                                    required: "Password is required",
-                                    onBlur: () => trigger("password")
-                                })}
-                                aria-invalid={!!errors.password}
-                                className={errors.password ? "border-red-500 focus:border-red-500" : ""}
-                            />
-                            <button type="button"
-                                className="absolute right-4 top-2/3 -translate-y-2/3 cursor-pointer"
-                                aria-label={isEyeOpen ? "Hide password" : "Show password"}
-                                onClick={() => setIsEyeOpen(!isEyeOpen)}
-                            >
-                                {isEyeOpen ? <EyeIcon className={`size-4`} /> : <EyeOffIcon className={`size-4`} />}
-                            </button>
-
+                            <div className="relative">
+                                <Input
+                                    id="password"
+                                    type={isEyeOpen ? "text" : "password"}
+                                    placeholder="Enter your password"
+                                    {...register("password", {
+                                        required: "Password is required",
+                                        onBlur: () => trigger("password")
+                                    })}
+                                    aria-invalid={!!errors.password}
+                                    className={`${errors.password ? "border-red-500 focus:border-red-500" : ""} pr-10`}
+                                />
+                                <button
+                                    type="button"
+                                    tabIndex={-1}
+                                    className="absolute inset-y-0 right-3 flex items-center justify-center cursor-pointer"
+                                    aria-label={isEyeOpen ? "Hide password" : "Show password"}
+                                    onClick={() => setIsEyeOpen(!isEyeOpen)}
+                                >
+                                    {isEyeOpen ? (
+                                        <EyeIcon className="size-4" />
+                                    ) : (
+                                        <EyeOffIcon className="size-4" />
+                                    )}
+                                </button>
+                            </div>
 
                             {/* Show error message in red below the input */}
                             {errors.password && (
