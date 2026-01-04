@@ -21,5 +21,8 @@
 - Creating feed page
    Add feed to the store 
    Build the user cards UI for feed
+- Edit/Update profile feature
+    Show toast message on save of profile
+- See all connections
 
     

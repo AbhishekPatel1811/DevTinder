@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CodeXml } from "lucide-react";
+import { CodeXml, UserPen, Users } from "lucide-react";
 
 import {
     DropdownMenu,
@@ -84,11 +84,15 @@ const Navbar = () => {
                                     <DropdownMenuGroup>
                                         <DropdownMenuItem asChild>
                                             <Link to="/profile">
+                                                <UserPen className="size-4 mr-2" />
                                                 Profile
                                             </Link>
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            Settings
+                                        <DropdownMenuItem asChild>
+                                            <Link to="/connections" >
+                                                <Users className="size-4 mr-2" />
+                                                Connections
+                                            </Link>
                                         </DropdownMenuItem>
                                     </DropdownMenuGroup>
                                     <DropdownMenuSeparator />
