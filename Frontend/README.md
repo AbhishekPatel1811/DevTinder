@@ -23,6 +23,13 @@
    Build the user cards UI for feed
 - Edit/Update profile feature
     Show toast message on save of profile
-- See all connections
+- Feat: Build connections page
+- Feat: Build connections requests page (accept/reject connection requests) 
+
+Remaining:
+- Send connection requests
+- Accept/ Reject users from feed
+- Signup new user
+- E2E testing 
 
     
