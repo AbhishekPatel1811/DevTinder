@@ -31,14 +31,6 @@ export const UserCard = ({ user }: { user: any }) => {
                                             </span>
                                         </span>
                                     </div>
-                                    {/* <div className="flex items-center justify-end gap-2 mt-4">
-                                        <button title="Like" className="cursor-pointer flex items-center justify-center size-10 bg-white rounded-full">
-                                            <Check className="size-8 text-green-500" strokeWidth={3} />
-                                        </button>
-                                        <button title="Dislike" className="cursor-pointer flex items-center justify-center size-10 bg-white rounded-full">
-                                            <X className="size-8 text-red-500" strokeWidth={3} />
-                                        </button>
-                                    </div> */}
                                 </div>
                             </div>
                         </div>
