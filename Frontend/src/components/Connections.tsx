@@ -22,12 +22,11 @@ const Connections = () => {
     }
 
     useEffect(() => {
-        console.log("Connections page rendered");
         fetchConnections()
     }, [])
 
     if (!connections) return
-    if (connections.length === 0) return <h1>No connections found</h1>
+    if (connections.length === 0) return <h1 className="text-2xl font-bold text-center mt-10">No connections found</h1>
 
     return (
         <div className="flex flex-col justify-center items-center my-10">
