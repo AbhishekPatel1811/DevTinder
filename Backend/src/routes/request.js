@@ -5,15 +5,15 @@ const { User } = require("../models/user");
 
 const router = express.Router();
 
-// Interested and Ignored API
+// Like and Dislike API
 router.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
   try {
     // Logged In user
     const fromUserId = req.user._id;
     const { toUserId, status } = req.params;
 
-    // Only allow ignored and interested as stauts
-    const allowedStatus = ["ignored", "interested"];
+    // Only allow Like and Dislike as stauts
+    const allowedStatus = ["like", "dislike"];
     if (!allowedStatus.includes(status)) {
       return res
         .status(400)
@@ -51,7 +51,7 @@ router.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
     const data = await connectionRequest.save();
 
     res.json({
-      message: req.user.firstName + " is " + status + " in " + toUser.firstName,
+      message: req.user.firstName + " " + status + "d " + toUser.firstName,
       data,
     });
   } catch (err) {
@@ -76,11 +76,11 @@ router.post(
           .json({ message: "Invalid status type: " + status });
       }
 
-      // Find the connectionRequest in db by requestId (userInput), ensuring the request approved by should be loggedIn user and the status should be interested
+      // Find the connectionRequest in db by requestId (userInput), ensuring the request approved by should be loggedIn user and the status should be like
       const connectionRequest = await ConnectionRequest.findOne({
         _id: requestId,
         toUserId: loggedInUser,
-        status: "interested",
+        status: "like",
       });
 
       if (!connectionRequest) {
@@ -94,12 +94,10 @@ router.post(
 
       const data = await connectionRequest.save();
 
-      res
-        .status(200)
-        .json({
-          message: "Connection request " + status + " successfully",
-          data,
-        });
+      res.status(200).json({
+        message: "Connection request " + status + " successfully",
+        data,
+      });
     } catch (err) {
       res.status(400).send("ERROR: " + err.message);
     }

@@ -14,7 +14,7 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
     // Find all pending connectionRequests
     const connectionRequests = await ConnectionRequest.find({
       toUserId: loggedInUser._id,
-      status: "interested",
+      status: "like",
       // }).populate("fromUserId", ["firstName", "lastName"]); // always pass the fields you want to populate
     }).populate("fromUserId", USER_SAFE_DATA);
 
