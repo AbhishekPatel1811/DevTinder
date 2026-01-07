@@ -9,6 +9,7 @@ const Feed = () => {
     const feed = useSelector((store: any) => store.feed)
     const API_URL = import.meta.env.VITE_API_URL
 
+
     const getFeed = async () => {
         if (feed) return
         try {
@@ -19,15 +20,21 @@ const Feed = () => {
             console.log("Feed error", error)
         }
     }
-    console.log("Feed data", feed)
 
     useEffect(() => {
         getFeed()
     }, [])
 
-    return (feed && (
-        <UserCard user={feed} />
-    )
+    if (!feed) return
+
+    if (feed.length <= 0) return <h1 className="text-xl font-bold text-center mt-10">No new users found!!!</h1>
+
+    return (
+        feed && (
+            <div className="flex items-center justify-center mt-4 mb-16">
+                <UserCard user={feed[0]} showButtons={true} />
+            </div>
+        )
     )
 };
 

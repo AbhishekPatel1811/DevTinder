@@ -50,7 +50,7 @@ const ProfileContainer = () => {
 
     return (
         <div className="flex justify-center items-center gap-12">
-            <UserCard user={[user]} />
+            <UserCard user={user} showButtons={false} />
             <div className="h-120 w-px bg-gray-300" />
             <EditProfile user={user} setUser={setUser} />
         </div>
