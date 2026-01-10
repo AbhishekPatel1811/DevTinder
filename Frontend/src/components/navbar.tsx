@@ -24,13 +24,14 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            await axiosInstance.post("/logout", {}, { withCredentials: true })
-            dispatch(removeUser(null))
-            navigate("/login")
+            await axiosInstance.post("/logout")
             toast.success("Logged out successfully!!");
+            dispatch(removeUser(null))
+            return navigate("/login")
         }
         catch (error) {
             console.log("error -->", error);
+            toast.error("Error logging out");
         }
     }
 

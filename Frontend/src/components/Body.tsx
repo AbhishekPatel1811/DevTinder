@@ -15,9 +15,9 @@ const Body = () => {
     const fetchUser = async () => {
         if (userData) return
         try {
+            console.log("calling profile/view API")
             const res = await axiosInstance.get("/profile/view")
             dispatch(addUser(res.data))
-            console.log("user -->", res.data);
         }
         catch (err: any) {
             if (err.response.status === 401) {

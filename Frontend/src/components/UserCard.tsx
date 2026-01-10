@@ -37,16 +37,16 @@ export const UserCard = ({ user, showButtons = true }: { user: any, showButtons?
                 </div>
                 <div className="absolute bottom-6 left-0 right-0 px-4 py-6 space-y-1 text-white">
                     <h2 className="text-3xl font-semibold tracking-wide">{user?.firstName} <span className="font-extralight">{user?.age}</span></h2>
-                    <p title={user?.about} className="text-sm line-clamp-2">{user?.about}</p>
+                    <p title={user?.about} className="w-72 max-w-md text-sm line-clamp-2">{user?.about}</p>
                     <div className="flex users-center gap-2">
-                        {/* Show upto only 2 skills */}
+                        {/* Show upto only 3 skills */}
                         <span className="text-sm">Skills:{" "}
                             {user.skills.length > 0 ? (
                                 <span className="font-bold">
                                     {Array.isArray(user?.skills)
-                                        ? user.skills.slice(0, 2).join(", ")
+                                        ? user.skills.slice(0, 3).join(", ")
                                         : (user?.skills || "No skills listed")}
-                                    {user.skills.length > 2 && <span className="text-xs text-gray-500">...</span>}
+                                    {user.skills.length > 3 && <span className="text-xs text-gray-500">...</span>}
                                 </span>
                             ) : (
                                 <span className="text-sm text-gray-500">No skills listed</span>

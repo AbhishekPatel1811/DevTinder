@@ -7,13 +7,12 @@ import { UserCard } from "./UserCard";
 const Feed = () => {
     const dispatch = useDispatch()
     const feed = useSelector((store: any) => store.feed)
-    const API_URL = import.meta.env.VITE_API_URL
-
 
     const getFeed = async () => {
         if (feed) return
         try {
-            const res = await axiosInstance.get(`${API_URL}/user/feed`)
+            console.log("calling user/feed API")
+            const res = await axiosInstance.get(`/user/feed`)
             dispatch(addFeed(res.data.data))
         }
         catch (error) {
