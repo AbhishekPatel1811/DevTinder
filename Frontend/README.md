@@ -25,10 +25,10 @@
     Show toast message on save of profile
 - Feat: Build connections page
 - Feat: Build connections requests page (accept/reject connection requests) 
+- Accept/ Reject users from feed
 
 Remaining:
 - Send connection requests
-- Accept/ Reject users from feed
 - Signup new user
 - E2E testing 
 
