@@ -5,11 +5,13 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { axiosInstance } from "@/lib/api"
+import { addUser } from "@/utils/userSlice"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, Controller } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
+import { useDispatch } from "react-redux"
 import { toast } from "sonner"
 import z from "zod"
-import { useEffect } from "react"
+import { UserCard } from "./UserCard"
 
 const editProfileSchema = z.object({
     firstName: z.string().min(3, "First Name must be at least 3 characters long"),
@@ -32,13 +34,13 @@ const editProfileSchema = z.object({
 
 type EditProfileFormData = z.infer<typeof editProfileSchema>;
 
-const EditProfile = ({ user, setUser }: { user: any, setUser: any }) => {
+const EditProfile = ({ user }: { user: any }) => {
+    const dispatch = useDispatch()
 
     const {
         handleSubmit,
         formState: { errors, isSubmitting },
         register,
-        watch,
         control
     } = useForm<EditProfileFormData>({
         resolver: zodResolver(editProfileSchema),
@@ -52,48 +54,6 @@ const EditProfile = ({ user, setUser }: { user: any, setUser: any }) => {
             photoUrl: user?.photoUrl || ""
         }
     })
-
-    // Watch individual form values for live preview (prevents infinite loop)
-    const firstName = watch("firstName")
-    const lastName = watch("lastName")
-    const about = watch("about")
-    const skills = watch("skills")
-    const age = watch("age")
-    const gender = watch("gender")
-    const photoUrl = watch("photoUrl")
-
-    // Sync form values with parent state for live preview
-    useEffect(() => {
-        const skillsString = Array.isArray(skills)
-            ? skills.join(", ")
-            : (typeof skills === "string" ? skills : "");
-
-        const newUserState = {
-            firstName: firstName || "",
-            lastName: lastName || "",
-            about: about || "",
-            skills: skillsString,
-            age: age?.toString() || "",
-            gender: gender || "",
-            photoUrl: photoUrl || ""
-        }
-
-        // Only update if values actually changed to prevent infinite loop
-        setUser((prev: any) => {
-            if (
-                prev.firstName === newUserState.firstName &&
-                prev.lastName === newUserState.lastName &&
-                prev.about === newUserState.about &&
-                prev.skills === newUserState.skills &&
-                prev.age === newUserState.age &&
-                prev.gender === newUserState.gender &&
-                prev.photoUrl === newUserState.photoUrl
-            ) {
-                return prev // Return same reference if nothing changed
-            }
-            return newUserState
-        })
-    }, [firstName, lastName, about, skills, age, gender, photoUrl])
 
     const onSubmit = async (data: EditProfileFormData) => {
         try {
@@ -109,10 +69,10 @@ const EditProfile = ({ user, setUser }: { user: any, setUser: any }) => {
                 photoUrl: data.photoUrl
             })
 
-            const updatedUser = res.data;
-            console.log("user ----", updatedUser)
+            dispatch(addUser(res?.data?.data));
+
             if (res.status === 200) {
-                toast.success("Profile updated successfully!!");
+                toast.success(res.data.message || "Profile updated successfully!!");
             }
         }
         catch (error: any) {
@@ -123,7 +83,7 @@ const EditProfile = ({ user, setUser }: { user: any, setUser: any }) => {
 
 
     return (
-        <div className="flex justify-center items-center h-full">
+        <div className="flex justify-center items-center h-full gap-12">
             {/* Edit profile form */}
             <div className="flex flex-col items-center gap-8">
                 <Card className="w-full md:w-[500px]">
@@ -262,6 +222,10 @@ const EditProfile = ({ user, setUser }: { user: any, setUser: any }) => {
                     </CardContent>
                 </Card>
             </div>
+
+            <div className="h-130 w-px bg-gray-300" />
+
+            <UserCard user={user} showButtons={false} />
         </div>
     )
 }
