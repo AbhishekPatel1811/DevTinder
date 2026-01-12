@@ -5,7 +5,7 @@ const { User } = require("../models/user");
 
 const router = express.Router();
 
-// Like and Dislike API
+// Like and Dislike API (send/ignore connection request)
 router.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
   try {
     // Logged In user

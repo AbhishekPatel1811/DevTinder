@@ -11,7 +11,7 @@
 - Configure and complete authentication
     Create a login, signup page
     Install CORS in backend => add middleware to with configuration: origin, credentials: true
-    When making API call so pass axios, {withCredentials: true}
+    When making API call use axiosInstance, that basically do the whole structured api call with {baseUrl} adnd {withCredentials: true}
     Install Redux toolkit (@reduxjs/toolkit +  react-redux)
        configureStore => Provider => createSlice => add reducer to store
     Login and see if data is stored properly in redux store
@@ -26,8 +26,6 @@
 - Feat: Build connections page
 - Feat: Build connections requests page (accept/reject connection requests) 
 - Send/ Ignore connection requests from feed (like, dislike)
-
-Remaining:
 - Signup new user
 - E2E testing 
 

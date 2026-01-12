@@ -17,8 +17,8 @@
 )
 
 # connectionRequestRouter
-- POST /request/send/:status/:userId
-- POST /request/review/:status/:requestId
+- POST /request/send/:status/:userId (Statuses - like, dislike users from feed)
+- POST /request/review/:status/:requestId (Statuses - accepted, rejected )
 
 # userRouter
 - GET /user/connections
