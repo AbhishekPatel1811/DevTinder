@@ -9,10 +9,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { axiosInstance } from "@/lib/api";
+import { addUser } from "@/utils/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import z from "zod";
@@ -34,6 +36,7 @@ const Signup = () => {
   const navigate = useNavigate()
   const [isEyeOpen, setIsEyeOpen] = useState(false)
   const [isEyeOpenConfirm, setIsEyeOpenConfirm] = useState(false)
+  const dispatch = useDispatch()
 
   const { register,
     watch,
@@ -58,11 +61,12 @@ const Signup = () => {
         password: data.password
       })
 
-      const user = res.data;
-      console.log("user ----", user)
+      const user = res.data.data;
+      dispatch(addUser(user))
+
       if (res.status === 200) {
-        toast.success("Signup successful!!");
-        navigate("/login")
+        toast.success("Signup successful!!!");
+        navigate("/profile")
       }
     }
     catch (error: any) {
