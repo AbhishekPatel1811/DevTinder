@@ -29,7 +29,7 @@ export const UserCard = ({ user, showButtons = true }: { user: any, showButtons?
                 {user?.photoUrl ? (
                     <img src={user.photoUrl} alt={user?.firstName || "User"} className="rounded-lg object-cover object-top size-full" />
                 ) : (
-                    <div className="rounded-lg object-cover size-full bg-gray-200 flex users-center justify-center text-gray-400 w-96 h-120">
+                    <div className="rounded-lg object-cover size-full bg-gray-200 flex users-center justify-center text-gray-400">
                         No Photo
                     </div>
                 )}
@@ -39,14 +39,14 @@ export const UserCard = ({ user, showButtons = true }: { user: any, showButtons?
                     <h2 className="text-3xl font-semibold tracking-wide">{user?.firstName} <span className="font-extralight">{user?.age}</span></h2>
                     <p title={user?.about} className="w-72 max-w-md text-sm line-clamp-2">{user?.about}</p>
                     <div className="flex users-center gap-2">
-                        {/* Show upto only 3 skills */}
+                        {/* Show upto only 2 skills */}
                         <span className="text-sm">Skills:{" "}
                             {user.skills.length > 0 ? (
                                 <span className="font-bold">
                                     {Array.isArray(user?.skills)
-                                        ? user.skills.slice(0, 3).join(", ")
+                                        ? user.skills.slice(0, 2).join(", ")
                                         : (user?.skills || "No skills listed")}
-                                    {user.skills.length > 3 && <span className="text-xs text-gray-500">...</span>}
+                                    {user.skills.length > 2 && <span className="text-xs text-gray-500">...</span>}
                                 </span>
                             ) : (
                                 <span className="text-sm text-gray-500">No skills listed</span>
