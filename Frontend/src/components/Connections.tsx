@@ -29,7 +29,7 @@ const Connections = () => {
     if (connections.length === 0) return <h1 className="text-2xl font-bold text-center mt-10">No connections found</h1>
 
     return (
-        <div className="flex flex-col justify-center items-center my-10">
+        <div className="flex flex-col justify-center items-center py-8">
             <h1 className="text-3xl font-bold">Connections</h1>
             <div className="mt-4 w-full max-w-lg mx-auto space-y-4">
                 {connections?.map((connection: any) => {

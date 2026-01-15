@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CodeXml, Mail, UserPen, Users } from "lucide-react";
+import { CodeXml, LogOut, Mail, UserPen, Users } from "lucide-react";
 
 import {
     DropdownMenu,
@@ -12,6 +12,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { axiosInstance } from "@/lib/api";
 import { removeUser } from "@/utils/userSlice";
+import { clearFeed } from "@/utils/feedSlice";
+import { removeConnections } from "@/utils/connectionSlice";
+import { clearRequests } from "@/utils/requestSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -27,6 +30,9 @@ const Navbar = () => {
             await axiosInstance.post("/logout")
             toast.success("Logged out successfully!!");
             dispatch(removeUser(null))
+            dispatch(clearFeed())
+            dispatch(removeConnections())
+            dispatch(clearRequests())
             return navigate("/login")
         }
         catch (error) {
@@ -104,7 +110,8 @@ const Navbar = () => {
                                     </DropdownMenuGroup>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem onClick={() => handleLogout()}>
-                                        Log out
+                                        <LogOut className="size-4 mr-2" />
+                                        <span>Log out</span>
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
