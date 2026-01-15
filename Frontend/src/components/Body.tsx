@@ -34,8 +34,8 @@ const Body = () => {
 
     return (
         <>
-            <Navbar />
-            <main className="flex flex-col grow min-h-screen">
+            <main className="flex flex-col grow min-h-screen bg-background">
+                <Navbar />
                 <Outlet />
             </main>
             <Footer />
