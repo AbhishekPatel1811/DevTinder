@@ -42,7 +42,7 @@ const Navbar = () => {
     }
 
     return (
-        <section className="px-6 py-3 mx-14 my-4 rounded-full border border-secondary bg-secondary/30 backdrop-blur-md shadow-lg">
+        <section className="px-6 py-3 mx-32 my-4 rounded-full border border-secondary bg-secondary/30 shadow-xl">
             <div className="container">
                 {/* Desktop Menu */}
                 <nav className="flex items-center justify-between">
