@@ -29,4 +29,22 @@
 - Signup new user
 - E2E testing 
 
-    
+
+# Deployment
+
+- Signup on AWS 
+- Launch instance
+- chmod 400 "devTinder-secret.pem"
+- ssh -i "devTinder-secret.pem" ubuntu@ec2-52-91-31-107.compute-1.amazonaws.com
+- install node version on the new system
+- Git clone
+- Frontend
+  > npm install -> dependencies install
+  > npm run build
+  > sudo apt update
+  > sudo apt install nginx
+  > sudo systemctl start nginx 
+  > sudo systemctl enable nginx
+  > Copy code from dist(build files) to var/www/html
+  > sudo scp -r dist/* /var/www/html/
+  Enable port :80 of your instance  
