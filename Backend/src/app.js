@@ -4,10 +4,10 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const app = express();
 
-// Whitelisting the frontend origin
+// Whitelisting the frontend origins
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://devstinderr.vercel.app"],
     credentials: true,
   })
 );

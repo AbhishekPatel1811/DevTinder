@@ -3,7 +3,7 @@
 - Signup on AWS 
 - Launch instance
 - chmod 400 "devTinder-secret.pem"
-- ssh -i "devTinder-secret.pem" ubuntu@ec2-52-91-31-107.compute-1.amazonaws.com
+- ssh -i "devTinder-secret.pem" ubuntu@ec2-100-52-106-149.compute-1.amazonaws.com
 - install node version on the new system
 - Git clone
 - Frontend
@@ -24,12 +24,12 @@
   > pm2 start npm --start
   - pm2 commands 
   - pm2 logs, pm2 flush <name>,  pm2 list, pm2 stop <name>, pm2 delete <name>, pm2 start npm --name "devTinder-backend" -- start 
-  > config nginx - /etc/nginx/available-sites/default
+  > config nginx - sudo nano /etc/nginx/available-sites/default
   > restart nginx
   > Modify the VITE_API_URL in frontend to "/api"   
 
 # Nginx config 
-  server name 52.91.31.107;
+  server_name 100.52.106.149;
 
   location /api/ {
         proxy_pass http://localhost:3000/;
@@ -42,3 +42,11 @@
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
   }
+
+# Adding a custom Domain name 
+- Purchase domain name 
+- signup on cloudflare & add a new domain name
+- change the nameservers on godaddy and point it to cloudflare
+- wait for sometime till your nameservers are updated 
+- DNS record: A devtinder.in -> point to your aws instance ip
+- Enable SSL for website (flexible) 
