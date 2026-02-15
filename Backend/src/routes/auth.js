@@ -8,6 +8,8 @@ const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
+const isProduction = process.env.NODE_ENV === "production";
+
 // Signup API
 router.post("/signup", async (req, res) => {
   try {
@@ -37,8 +39,8 @@ router.post("/signup", async (req, res) => {
     res.cookie("token", token, {
       expires: new Date(Date.now() + 8 * 3600000), // cookie will be expired in 8hrs
       httpOnly: true,
-      secure: true,
-      sameSite: "none"
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
     });
 
     res.json({ message: "User Added successfully!", data: savedUser });
@@ -74,8 +76,8 @@ router.post("/login", async (req, res) => {
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000), // cookie will be expired in 8hrs
         httpOnly: true,
-        secure: true,
-        sameSite: "none"
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
       });
       res.send(user);
     } else {
@@ -91,8 +93,8 @@ router.post("/logout", async (req, res) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
-    secure: true,
-    sameSite: "none"
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
   });
 
   res.send("Logged out successfully!!!");
