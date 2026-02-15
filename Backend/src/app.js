@@ -7,9 +7,9 @@ const app = express();
 // Whitelisting the frontend origins
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://devstinderr.vercel.app"],
+    origin: ["http://localhost:5173", "http://13.235.115.22"],
     credentials: true,
-  })
+  }),
 );
 
 // for parsing incoming requests with json payloads
