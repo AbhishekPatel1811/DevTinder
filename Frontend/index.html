@@ -3,12 +3,19 @@
   <head>
     
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BPWQQTXY9S"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-BPWQQTXY9S');
+    <script type="module">
+      const GA_ID = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
+      if (GA_ID) {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      }
     </script>
     
     <meta charset="UTF-8" />
