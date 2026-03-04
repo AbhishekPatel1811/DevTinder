@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -77,6 +78,11 @@ const Signup = () => {
 
   return (
     <section className="bg-muted h-screen">
+      <SEO 
+          title="Signup | DevTinder" 
+          description="Create a new DevTinder account to start connecting with developers." 
+          url="https://devstinderr.site/signup"
+      />
       <div className="flex h-full items-center justify-center">
         <div className="flex flex-col items-center gap-6">
           <Card className="w-full md:w-[400px]">
