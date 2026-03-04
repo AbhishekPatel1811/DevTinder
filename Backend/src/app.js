@@ -7,7 +7,7 @@ const app = express();
 // Whitelisting the frontend origins
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://13.235.115.22"],
+    origin: ["http://localhost:5173", "http://13.235.115.22", "https://devstinderr.site"],
     credentials: true,
   }),
 );

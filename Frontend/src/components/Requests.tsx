@@ -1,3 +1,4 @@
+import SEO from "./SEO";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { axiosInstance } from "@/lib/api"
 import { addRequests, removeRequest } from "@/utils/requestSlice"
@@ -47,6 +48,7 @@ const Requests = () => {
 
     return (
         <div className="flex flex-col justify-center items-center py-8">
+            <SEO title="Requests | DevTinder" description="View your connection requests on DevTinder." url="https://devstinderr.site/requests" />
             <h1 className="text-3xl font-bold">Requests Received</h1>
             <div className="mt-4 w-full max-w-lg mx-auto space-y-4">
                 {requests?.map((request: any) => {
