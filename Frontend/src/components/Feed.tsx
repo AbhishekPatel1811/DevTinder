@@ -1,3 +1,4 @@
+import SEO from "./SEO";
 import { axiosInstance } from "@/lib/api";
 import { addFeed, clearFeed } from "@/utils/feedSlice";
 import { useEffect, useRef } from "react";
@@ -41,9 +42,12 @@ const Feed = () => {
 
     return (
         feed && (
-            <div className="flex items-center justify-center pt-4 pb-6">
-                <UserCard user={feed[0]} showButtons={true} />
-            </div>
+            <>
+                <SEO title="Feed | DevTinder" description="Discover and connect with developers on DevTinder." url="https://devstinderr.site" />
+                <div className="flex items-center justify-center pt-4 pb-6">
+                    <UserCard user={feed[0]} showButtons={true} />
+                </div>
+            </>
         )
     )
 };

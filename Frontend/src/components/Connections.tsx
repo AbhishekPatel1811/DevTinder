@@ -1,3 +1,4 @@
+import SEO from "./SEO";
 import { axiosInstance } from "@/lib/api"
 import { addConnections } from "@/utils/connectionSlice"
 import { useEffect } from "react"
@@ -30,6 +31,7 @@ const Connections = () => {
 
     return (
         <div className="flex flex-col justify-center items-center py-8">
+            <SEO title="Connections | DevTinder" description="View your connections on DevTinder." url="https://devstinderr.site/connections" />
             <h1 className="text-3xl font-bold">Connections</h1>
             <div className="mt-4 w-full max-w-lg mx-auto space-y-4">
                 {connections?.map((connection: any) => {

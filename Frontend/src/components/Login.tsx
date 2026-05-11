@@ -1,5 +1,7 @@
 "use client";
 
+import SEO from "@/components/SEO";
+
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -71,6 +73,11 @@ export default function Login() {
 
     return (
         <section className="bg-muted flex flex-col justify-center items-center h-screen space-y-8">
+            <SEO 
+                title="Login | DevTinder" 
+                description="Login to your DevTinder account to continue connecting with developers." 
+                url="https://devstinderr.site/login"
+            />
             <div className="flex flex-col items-center gap-2 justify-center">
                 <span className="flex items-center gap-2 font-semibold text-3xl">
                     <CodeXml className="size-7 shrink-0" />
