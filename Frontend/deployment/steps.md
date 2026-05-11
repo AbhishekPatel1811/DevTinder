@@ -6,8 +6,8 @@
   - Create a key pair 
   - Launch instance 
 - Open terminal and run 
-- chmod 400 <secret>
-- ssh -i <secret> ubuntu@ec2-13-235-115-22.ap-south-1.compute.amazonaws.com
+- chmod 400 <your-key-file.pem>
+- ssh -i <your-key-file.pem> ubuntu@ec2-13-235-115-22.ap-south-1.compute.amazonaws.com
 - install node version - nvm install <version> same as of project
 - Git clone
 - Frontend
