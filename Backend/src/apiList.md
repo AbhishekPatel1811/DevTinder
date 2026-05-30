@@ -8,12 +8,12 @@
 # profileRouter 
 - GET /profile/view
 - PATCH /profile/edit
-- PATCH /profile/password - Forgot password API 
+- PATCH /profile/password - Change password API
 (
-- Take existing pass with new password
-- Validate password 
-- bcrypt.compare
-- update pass in db
+- Takes currentPassword and newPassword
+- Validates new password strength
+- Compares current password with bcrypt
+- Updates password in db
 )
 
 # connectionRequestRouter

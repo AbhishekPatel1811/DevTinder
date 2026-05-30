@@ -35,11 +35,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      validate(value) {
-        if (!validator.isStrongPassword(value)) {
-          throw new Error("Password is not strong enough: " + value);
-        }
-      },
+      select: false,
     },
     age: { type: Number, min: 18, max: 50 },
     gender: {
@@ -49,7 +45,7 @@ const userSchema = new Schema(
         message: `{VALUE} is not a valid gender type`,
       },
       validate(value) {
-        if (!["male", "female", "other"].includes(value)) {
+        if (!["male", "female", "others"].includes(value)) {
           throw new Error("Gender data is not valid");
         }
       },
@@ -68,10 +64,21 @@ const userSchema = new Schema(
   { timestamps: true } // By default it adds createdAt and updatedAt fields to the schema
 );
 
+userSchema.methods.toJSON = function () {
+  const user = this.toObject();
+  delete user.password;
+  return user;
+};
+
 userSchema.methods.getJWT = async function () {
   const user = this;
+  const jwtSecret = process.env.JWT_SECRET;
 
-  const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$369", {
+  if (!jwtSecret) {
+    throw new Error("JWT_SECRET environment variable is required");
+  }
+
+  const token = await jwt.sign({ _id: user._id }, jwtSecret, {
     expiresIn: "7d",
   });
 

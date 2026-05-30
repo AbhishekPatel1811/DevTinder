@@ -11,6 +11,10 @@
 - install node version - nvm install <version> same as of project
 - Git clone
 - Frontend
+  - Set frontend env before building:
+    - VITE_API_URL=/api
+    - VITE_SITE_URL=https://your-new-domain.example
+  - Update public/robots.txt and public/sitemap.xml with your final domain before building
   - npm install -> dependencies install
   - npm run build
   - sudo apt update
@@ -24,8 +28,15 @@
 # Backend Deployment
 
   - Allow ec2 instance public IP on mongodb server
+  - Set backend environment variables before starting PM2:
+    - PORT=3000
+    - NODE_ENV=production
+    - MONGODB_URI=<your MongoDB Atlas URI>
+    - JWT_SECRET=<long random secret>
+    - FRONTEND_URL=http://13.235.115.22,https://your-new-domain.example
+  - Recommended: create Backend/.env on EC2 using Backend/.env.example as reference
   - Install PM2 - npm install pm2 -g
-  - pm2 start npm --start
+  - pm2 start npm --name "devTinder-backend" -- start
   - pm2 commands 
   - pm2 logs, pm2 flush <name>,  pm2 list, pm2 stop <name>, pm2 delete <name>, pm2 start npm --name "devTinder-backend" -- start 
   - config nginx - sudo nano /etc/nginx/available-sites/default
@@ -53,5 +64,7 @@
 - signup on cloudflare & add a new domain name
 - change the nameservers on godaddy and point it to cloudflare
 - wait for sometime till your nameservers are updated 
-- DNS record: A devtinder.in -> point to your aws instance ip
+- DNS record: A <your-new-domain> -> point to your aws instance ip
+- Update backend FRONTEND_URL with https://<your-new-domain>
+- Update Nginx server_name with <your-new-domain>
 - Enable SSL for website (flexible) 

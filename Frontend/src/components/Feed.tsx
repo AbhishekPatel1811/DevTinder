@@ -43,7 +43,7 @@ const Feed = () => {
     return (
         feed && (
             <>
-                <SEO title="Feed | DevTinder" description="Discover and connect with developers on DevTinder." url="https://devstinderr.site" />
+                <SEO title="Feed | DevTinder" description="Discover and connect with developers on DevTinder." url="/" />
                 <div className="flex items-center justify-center pt-4 pb-6">
                     <UserCard user={feed[0]} showButtons={true} />
                 </div>

@@ -473,7 +473,7 @@ Get all pending connection requests received by the user.
 ## 🔐 Authentication & Security
 
 ### JWT Token Management
-- **Secret Key**: `"DEV@Tinder$369"` (⚠️ Should be moved to environment variables in production)
+- **Secret Key**: Loaded from the `JWT_SECRET` environment variable
 - **Expiration**: 7 days
 - **Storage**: HTTP-only cookies (8-hour expiration)
 - **Token Payload**: `{ _id: user._id }`
@@ -591,7 +591,7 @@ try {
 - Database name: `devTinder`
 - Connection method: `mongoose.connect()`
 
-**Note:** Connection string is hardcoded (⚠️ Should use environment variables in production)
+**Note:** Connection string is loaded from the `MONGODB_URI` environment variable.
 
 ### Server Configuration (`src/app.js`)
 
@@ -617,8 +617,7 @@ try {
    ```
 
 2. **Configure Database**
-   - Update MongoDB connection string in `src/config/database.js`
-   - Or set `MONGODB_URI` environment variable
+   - Set the `MONGODB_URI` environment variable
 
 3. **Start Development Server**
    ```bash
@@ -636,6 +635,7 @@ try {
 Create a `.env` file:
 ```env
 PORT=3000
+NODE_ENV=production
 MONGODB_URI=mongodb+srv://...
 JWT_SECRET=your-secret-key-here
 FRONTEND_URL=http://localhost:5173
@@ -702,8 +702,8 @@ Response to Client
 ## 📝 Notes & Best Practices
 
 ### Current Implementation Notes
-- JWT secret is hardcoded (should use environment variables)
-- Database connection string is hardcoded (should use environment variables)
+- JWT secret is loaded from environment variables
+- Database connection string is loaded from environment variables
 - Error messages are sent as plain strings (consider structured error responses)
 - No rate limiting implemented
 - No request logging/monitoring

@@ -3,6 +3,11 @@ const { User } = require("../models/user");
 
 const userAuth = async (req, res, next) => {
   try {
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      throw new Error("JWT_SECRET environment variable is required");
+    }
+
     // Read the token from the req cookies
     const { token } = req.cookies;
     if (!token) {
@@ -10,7 +15,7 @@ const userAuth = async (req, res, next) => {
     }
 
     // Validate the token
-    const decodeObj = await jwt.verify(token, "DEV@Tinder$369");
+    const decodeObj = await jwt.verify(token, jwtSecret);
 
     const { _id } = decodeObj;
 
@@ -24,7 +29,7 @@ const userAuth = async (req, res, next) => {
     req.user = user;
     return next();
   } catch (err) {
-    res.status(400).send("ERROR: " + err.message);
+    res.status(401).send("ERROR: " + err.message);
   }
 };
 

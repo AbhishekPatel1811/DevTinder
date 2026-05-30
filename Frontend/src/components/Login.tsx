@@ -76,7 +76,7 @@ export default function Login() {
             <SEO 
                 title="Login | DevTinder" 
                 description="Login to your DevTinder account to continue connecting with developers." 
-                url="https://devstinderr.site/login"
+                url="/login"
             />
             <div className="flex flex-col items-center gap-2 justify-center">
                 <span className="flex items-center gap-2 font-semibold text-3xl">

@@ -25,14 +25,6 @@ const validateLoginData = (req) => {
 const validateProfileEditData = (req) => {
   const { age, photoUrl, skills } = req.body;
 
-  if (age <= 18) {
-    throw new Error("Your age is not valid");
-  } else if (!validator.isURL(photoUrl)) {
-    throw new Error("Invalid photo URL");
-  } else if (skills.length > 10) {
-    throw new Error("please add only 10 skills");
-  }
-
   const isAllowedEditFields = [
     "firstName",
     "lastName",
@@ -47,11 +39,38 @@ const validateProfileEditData = (req) => {
     isAllowedEditFields.includes(field)
   );
 
-  return isAllowedFields;
+  if (!isAllowedFields) {
+    return false;
+  }
+
+  if (age !== undefined && age <= 18) {
+    throw new Error("Your age is not valid");
+  } else if (photoUrl !== undefined && !validator.isURL(photoUrl)) {
+    throw new Error("Invalid photo URL");
+  } else if (skills !== undefined && (!Array.isArray(skills) || skills.length > 10)) {
+    throw new Error("please add only 10 skills");
+  }
+
+  return true;
+};
+
+const validatePasswordChangeData = (req) => {
+  const { currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword) {
+    throw new Error("Current password and new password are required");
+  }
+
+  if (!validator.isStrongPassword(newPassword)) {
+    throw new Error("New password is not strong enough");
+  }
+
+  return true;
 };
 
 module.exports = {
   validateSignUpData,
   validateLoginData,
   validateProfileEditData,
+  validatePasswordChangeData,
 };

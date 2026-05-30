@@ -20,7 +20,6 @@ router.post("/signup", async (req, res) => {
 
     // Encrypt the password
     const passwordHash = await bcrypt.hash(password, 10);
-    console.log("Password Hash: " + passwordHash);
 
     // Creating a new instance of the user model
     const user = new User({
@@ -58,15 +57,13 @@ router.post("/login", async (req, res) => {
     validateLoginData(req);
 
     // find the user
-    const user = await User.findOne({ emailId: emailId });
+    const user = await User.findOne({ emailId: emailId }).select("+password");
     if (!user) {
       throw new Error("User not found");
     }
 
     // compare the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    console.log("isPasswordValid -->", isPasswordValid);
 
     if (isPasswordValid) {
       // create a JWT token

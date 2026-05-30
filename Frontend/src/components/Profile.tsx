@@ -10,7 +10,7 @@ const Profile = () => {
                 <SEO 
                     title={`${user.firstName} ${user.lastName} - Profile | DevTinder`} 
                     description={`View and edit the profile of ${user.firstName} ${user.lastName}`} 
-                    url="https://devstinderr.site/profile"
+                    url="/profile"
                 />
                 <EditProfile user={user} />
             </div>

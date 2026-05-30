@@ -15,7 +15,7 @@ const Requests = () => {
 
     const reviewRequest = async (status: string, requestId: string) => {
         try {
-            const res = await axiosInstance.post(`request/review/${status}/${requestId} `)
+            const res = await axiosInstance.post(`/request/review/${status}/${requestId}`)
             console.log("reviewRequest----->", res.data.data)
             navigate("/connections")
             toast.success(`Request ${status}ed successfully`)
@@ -48,7 +48,7 @@ const Requests = () => {
 
     return (
         <div className="flex flex-col justify-center items-center py-8">
-            <SEO title="Requests | DevTinder" description="View your connection requests on DevTinder." url="https://devstinderr.site/requests" />
+            <SEO title="Requests | DevTinder" description="View your connection requests on DevTinder." url="/requests" />
             <h1 className="text-3xl font-bold">Requests Received</h1>
             <div className="mt-4 w-full max-w-lg mx-auto space-y-4">
                 {requests?.map((request: any) => {

@@ -13,11 +13,11 @@ export const axiosInstance = axios.create({
 
 // Add a response interceptor
 axiosInstance.interceptors.response.use(function onFulfilled(response) {
-    if (response.status === 401) {
+    return response;
+}, function onRejected(error) {
+    if (error.response?.status === 401) {
         toast.error("Unauthorized");
         window.location.href = "/login"
     }
-    return response;
-}, function onRejected(error) {
     return Promise.reject(error);
 });

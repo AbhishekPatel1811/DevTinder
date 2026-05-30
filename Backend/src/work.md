@@ -92,7 +92,7 @@ Create routes folder for managing auth, profile, request routers
 Create authRouter, profileRouter, requestRouter
 Create POST /logout API
 Create PATCH /profile/edit
-Create PATCH /profile/password API - Forgot password
+Create PATCH /profile/password API - Change password
 
 Create ConnectionRequest Schema 
 Send Connection Request  API

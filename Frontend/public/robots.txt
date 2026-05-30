@@ -3,4 +3,4 @@ Disallow: /login
 Disallow: /signup
 Allow: /
 
-Sitemap: https://devstinderr.site/sitemap.xml
+Sitemap: https://your-new-domain.example/sitemap.xml

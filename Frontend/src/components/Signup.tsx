@@ -81,7 +81,7 @@ const Signup = () => {
       <SEO 
           title="Signup | DevTinder" 
           description="Create a new DevTinder account to start connecting with developers." 
-          url="https://devstinderr.site/signup"
+          url="/signup"
       />
       <div className="flex h-full items-center justify-center">
         <div className="flex flex-col items-center gap-6">
